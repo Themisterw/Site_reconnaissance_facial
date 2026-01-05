@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+
+{% block content %}
+     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .conteneur {
+            text-align: center;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .conteneur h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        .conteneur p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .bouton-merci {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .bouton-merci:hover {
+            background-color: #b56565;
+        }
+    </style>
+    <div class="conteneur">
+        <h1>Merci pour votre retour!</h1>
+        <p>Nous apprécions vos commentaires et nous vous en sommes reconnaissants.</p>
+        <button class="bouton-merci" onclick="window.location.href='{{ url_for('acceuil') }}'">Retourner à l'accueil</button>
+    </div>
+{% endblock %}

@@ -1,0 +1,388 @@
+/* Container principal */
+body {
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  font-family: 'Lato', sans-serif;
+}
+
+main {
+  margin-left: 220px; /* Correspond à la largeur du menu gauche */
+  padding: 20px;
+}
+
+/* Barre de navigation */
+#navfixe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #773c3c;
+  padding: 0 40px;
+  height: 100px;
+  z-index: 1000;
+}
+
+#navfixe .buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#navfixe .buttons a {
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+}
+
+#navfixe .buttons .connexion {
+  background-color: #8B0000;
+}
+
+#navfixe .buttons .senregistrer {
+  background-color: #A52A2A;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: auto;
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+}
+
+/* Supprimer la marge à gauche pour aligner le logo sur le bord gauche */
+#navfixe {
+  padding-left: 0;
+}
+
+.logo {
+  margin-left: 0;
+}
+
+/* Menu gauche */
+.menu_gauche {
+  position: fixed;
+  top: 100px; /* Ajustez pour être sous la barre de navigation */
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #5a2a2a;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-nav .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.side-nav .nav-link:hover {
+  background-color: #773c3c;
+  color: #ffffff;
+}
+
+/* Conteneur de résultat */
+.result-container {
+  margin-top: 120px;
+  margin-left: 220px; /* Ajustez pour être à côté du menu gauche */
+  padding: 20px;
+  text-align: center; /* Centrer le texte */
+}
+
+/* Formulaire */
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="file"] {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Styles pour les boutons de soumission */
+input[type="submit"],
+/* Styles pour tous les boutons */
+button {
+    width: 48%; /* Réduire la largeur des boutons pour les mettre côte à côte */
+    max-width: 300px;
+    padding: 10px 20px; /* Ajuster le padding pour correspondre au style de .bouton-merci */
+    margin-bottom: 20px;
+    margin-top: 20px; /* Ajouter la marge supérieure */
+    font-size: 1em; /* Ajouter la taille de police */
+    background-color: #8B0000; /* Couleur de fond rouge */
+    color: #fff; /* Couleur du texte blanc */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Ajouter la transition avec easing */
+    border-radius: 8px; /* Arrondir les coins */
+}
+
+
+
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #b56565; /* Couleur de fond au survol */
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.alert.error {
+    background-color: #f44336;
+    color: white;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Aligner les boutons côte à côte */
+}
+
+/* Image de la page d'accueil */
+.hero-image {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hero-img {
+    max-width: calc(100% - 240px); /* Ajuster pour ne pas déborder sur le menu gauche */
+    height: auto;
+    margin-left: -50px; /* Pour toucher le bord du menu à gauche */
+    border-radius: 100px;
+}
+.hero-text {
+    margin-top: 20px; /* Espace au-dessus du texte */
+    color: #003366; /* Bleu foncé pour le titre */
+    font-size: 1rem; /* Taille de police plus petite */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+/* Bouton du rôle */
+.role-button {
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: default;
+  outline: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  background-color: #4CAF50; /* Vert par défaut */
+}
+
+.role-button.admin {
+  background-color: #FFA500; /* Orange pour l'administrateur */
+}
+
+.role-button.super_admin {
+  background-color: #FFD700; /* Or pour le super-administrateur */
+}
+
+.role-button.user {
+  background-color: #6495ED; /* Bleu pour l'utilisateur */
+}
+/*Resultat Emotion */
+
+
+/* Container principal */
+.faces-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Carte pour chaque visage */
+.face-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.333% - 40px); /* Trois cartes par ligne avec un écart de 20px */
+    min-width: 250px;
+}
+
+/* Liste des émotions */
+.emotion-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Élément de la liste des émotions */
+.emotion-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.emotion-name {
+    flex: 0 0 120px;
+    font-weight: bold;
+    color: #333;
+}
+
+.emotion-score {
+    flex: 0 0 50px;
+    text-align: right;
+    margin-right: 10px;
+    color: #666;
+}
+
+/* Barre de progression pour les scores d'émotion */
+.emotion-bar {
+    flex: 1;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.emotion-bar-fill {
+    height: 100%;
+    background-color: #8B0000;
+    border-radius: 5px 0 0 5px;
+}
+
+/* Alertes */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    color: #31708f;
+    border: 1px solid #bce8f1;
+}
+/*Menu déroulant*/
+/* Styles pour le dropdown dans le menu gauche */
+.nav-item .dropdown-menu {
+  background-color: #800000;  /* Nouveau type de rouge */
+  border: none;
+  box-shadow: none;
+  min-width: 200px; /* Ajustez la largeur selon vos besoins */
+  display: none; /* Masque le menu par défaut */
+  position: absolute;
+  left: 0; /* Alignement avec le lien parent */
+  top: 100%; /* Place le menu directement en dessous du lien parent */
+  border-radius: 8px; /* Arrondir les coins */
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block; /* Affiche le menu lorsqu'on survole l'élément parent */
+}
+
+.nav-item .dropdown-menu .dropdown-item {
+  display: block;  /* Forcer les éléments à s'afficher en tant que blocs */
+  color: #ffffff;  /* Même couleur de texte que les autres liens */
+  padding: 10px 15px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-item .dropdown-menu .dropdown-item:hover {
+  background-color: #a83232;  /* Couleur de survol */
+  color: #ffffff;
+}
+
+/* Correction du surlignage non souhaité */
+.nav-link, .dropdown-item {
+  text-decoration: none;
+}
+
+.nav-link:hover, .dropdown-item:hover {
+  text-decoration: none;
+}
+/* style.css abonnement  */
+
+/* Style pour le lien Abonnement */
+#navfixe .buttons .abonnement {
+    background-color: #ff0000; /* Rouge foncé */
+    color: white; /* Couleur du texte */
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+  }
+
+  /* Styles pour les alertes Bootstrap */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

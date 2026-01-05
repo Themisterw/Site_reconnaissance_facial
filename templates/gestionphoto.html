@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="mt-4">Gestion des Visages Connus</h2>
+
+                <h4>Créer un Nouveau Dossier</h4>
+                <form method="post" action="{{ url_for('creer_dossier') }}">
+                    <div class="form-group">
+                        <label for="nom_dossier">Nom du dossier</label>
+                        <input type="text" class="form-control" id="nom_dossier" name="nom_dossier" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </form>
+
+                <h4 class="mt-4">Ajouter une Image</h4>
+                <form method="post" enctype="multipart/form-data" action="{{ url_for('ajouter_image') }}">
+                    <div class="form-group">
+                        <label for="dossier">Sélectionner le dossier</label>
+                        <select class="form-control" id="dossier" name="dossier" required>
+                            {% for dossier in dossiers %}
+                                <option value="{{ dossier }}">{{ dossier }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fichier">Choisir une image</label>
+                        <input type="file" class="form-control-file" id="fichier" name="fichier" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+
+                <h4 class="mt-4">Fichiers et Dossiers</h4>
+                <ul class="list-group">
+                    {% for dossier, fichiers in dossiers.items() %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>{{ dossier }}</span>
+                                <form method="post" action="{{ url_for('supprimer_dossier', dossier=dossier) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer Dossier</button>
+                                </form>
+                            </div>
+                            <ul>
+                                {% for fichier in fichiers %}
+                                    <li style="margin-left: 20px;">
+                                        <div class="d-flex justify-content-between">
+                                            <span>{{ fichier }}</span>
+                                            <form method="post" action="{{ url_for('supprimer_image', dossier=dossier, image=fichier) }}">
+                                                <button type="submit" class="btn btn-danger btn-sm">Supprimer Image</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<nav id="navfixe">
+    <a href="{{ url_for('acceuil') }}" class="logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Reconnaissance Faciale">
+    </a>
+    <div class="buttons">
+        {% if 'utilisateur' in session %}
+            <a href="{{ url_for('logout') }}" class="connexion">Déconnexion</a>
+            <a href="#" class="senregistrer">{{ session['utilisateur'] }}</a>
+            {% if session.get('role') %}
+                <span class="role-button {{ session.get('role') }}">{{ session.get('role') }}</span>
+                {% if session.get('role') == 'user' %}
+                    {% if abonnement_status == "Abonné" %}
+                        <a href="" class="abonnement" id="abonnementButton" data-status="abonné">Abonné</a>
+                    {% else %}
+                        <a href="" class="abonnement" id="abonnementLink" data-status="non-abonné">Abonnement</a>
+                        <form id="abonnementForm" action="{{ url_for('mettre_a_jour_abonnement') }}" method="post" style="display:none;">
+                            <input type="hidden" name="login" value="{{ session['utilisateur'] }}">
+                        </form>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <a href="{{ url_for('login') }}" class="connexion">Connexion</a>
+            <a href="{{ url_for('inscription') }}" class="senregistrer">S'enregistrer</a>
+        {% endif %}
+    </div>
+</nav>
+
+<script>
+document.getElementById('abonnementLink')?.addEventListener('click', function(event) {
+    event.preventDefault();
+    var form = document.getElementById('abonnementForm');
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", form.action, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var abonnementButton = document.getElementById('abonnementLink');
+            if (abonnementButton) {
+                abonnementButton.textContent = 'Abonné';
+                abonnementButton.id = 'abonnementButton';
+                abonnementButton.setAttribute('data-status', 'abonné');
+            }
+        }
+    };
+    xhr.send(new URLSearchParams(new FormData(form)).toString());
+});
+
+document.getElementById('abonnementButton')?.addEventListener('click', function(event) {
+    event.preventDefault();
+    alert('Vous êtes déjà abonné.');
+});
+</script>

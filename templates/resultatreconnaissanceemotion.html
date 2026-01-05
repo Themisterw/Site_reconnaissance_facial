@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+
+{% block content %}
+    <h1>Résultats de l'Analyse des Émotions</h1>
+    <div class="image-container" style="text-align: center; margin-bottom: 20px;">
+        <img id="result-image" src="data:image/jpeg;base64,{{ image_base64 }}" alt="Image analysée" style="width: 400px; height: auto;">
+    </div>
+{% if emotions and emotions[0].get('message') %}
+    <div class="alert alert-info">
+        <p>{{ emotions[0].message }}</p>
+    </div>
+{% else %}
+    <div class="faces-container">
+        {% for face_location, emotion, conclusion in zip(face_locations, emotions, conclusions) %}
+            <div class="face-card">
+                <h2>Visage {{ loop.index }}</h2>
+                <ul class="emotion-list">
+                    {% for emo, score in emotion.items() %}
+                        <li class="emotion-item">
+                            <span class="emotion-name">{{ emo }}:</span>
+                            <span class="emotion-score">{{ score | float | round(4) }}</span>
+                            <div class="emotion-bar">
+                                <div class="emotion-bar-fill" style="width: {{ score }}%;"></div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Conclusion :</strong> {{ conclusion }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+   <div style="margin-top: 20px;">
+        <form action="/soumettre_emotion" method="post">
+            <p>Votre avis sur ces résultats :</p>
+            <div>
+                <input type="radio" id="bon" name="feedback" value="bon" required>
+                <label for="bon">Bon</label>
+            </div>
+            <div>
+                <input type="radio" id="faux" name="feedback" value="faux">
+                <label for="faux">Faux</label>
+            </div>
+            <button type="submit" style="margin-top: 10px;">Soumettre Avis</button>
+        </form>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="downloadImage()" class="btn btn-primary">Télécharger l'image</button>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.location.href='/menureconnaissanceemotion'" type="submit" style="margin-top: 10px;">Retour</button>
+    </div>
+
+    <script>
+        function downloadImage() {
+            const image = document.getElementById('result-image');
+            const link = document.createElement('a');
+            link.href = image.src;
+            link.download = 'image_modifiee.jpg';
+            link.click();
+        }
+    </script>
+{% endblock %}

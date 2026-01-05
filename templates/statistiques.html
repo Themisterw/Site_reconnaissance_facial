@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+
+{% block content %}
+    <h1>Statistiques de reconnaissance faciale</h1>
+    <table border="1">
+        <tr>
+            <th></th>
+            <th>Prédiction: Positif</th>
+            <th>Prédiction: Négatif</th>
+        </tr>
+        <tr>
+            <th>Vrai: Positif</th>
+            <td>{{ cm[0][0] }}</td>
+            <td>{{ cm[0][1] }}</td>
+        </tr>
+        <tr>
+            <th>Vrai: Négatif</th>
+            <td>{{ cm[1][0] }}</td>
+            <td>{{ cm[1][1] }}</td>
+        </tr>
+    </table>
+    <p><strong>Vrai: Positif, Prédiction: Positif :</strong> Nombre de cas où le modèle a correctement prédit une classe positive (vrai positif).</p>
+    <p><strong>Vrai: Positif, Prédiction: Négatif :</strong> Nombre de cas où le modèle a incorrectement prédit une classe négative alors que c'était une classe positive (faux négatif).</p>
+    <p><strong>Vrai: Négatif, Prédiction: Positif :</strong> Nombre de cas où le modèle a incorrectement prédit une classe positive alors que c'était une classe négative (faux positif).</p>
+    <p><strong>Vrai: Négatif, Prédiction: Négatif :</strong> Nombre de cas où le modèle a correctement prédit une classe négative (vrai négatif).</p>
+
+    <h2>Mesures de Performance</h2>
+    <p>Exactitude : {{ accuracy }}</p>
+    <p><strong>Exactitude :</strong> Proportion de prédictions correctes (vrai positif et vrai négatif) parmi toutes les prédictions.</p>
+
+    <p>Précision : {{ precision }}</p>
+    <p><strong>Précision :</strong> Proportion de vraies prédictions positives parmi toutes les prédictions positives (vrai positif et faux positif).</p>
+
+    <p>Rappel : {{ recall }}</p>
+    <p><strong>Rappel :</strong> Proportion de vraies prédictions positives parmi tous les cas réellement positifs (vrai positif et faux négatif).</p>
+
+    <p>Score F1 : {{ f1 }}</p>
+    <p><strong>Score F1 :</strong> Moyenne harmonique de la précision et du rappel.</p>
+
+    <p>Coefficient de corrélation de Matthews (MCC): {{ mcc }}</p>
+    <p><strong>Coefficient de corrélation de Matthews (MCC) :</strong> Mesure de la qualité des classifications binaires.</p>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+
+{% block content %}
+    <main>
+        <h2>Liste des utilisateurs</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Pseudonyme</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                    <th>Changer le rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pseudonyme, user in utilisateurs.items() %}
+                <tr>
+                    <td>{{ user['prenom'] }}</td>
+                    <td>{{ user['nom'] }}</td>
+                    <td>{{ pseudonyme }}</td>
+                    <td>{{ user['email'] }}</td>
+                    <td>{{ user['role'] }}</td>
+                    <td>
+                        {% if user['role'] != 'super_admin' %}
+                        <form method="post" action="{{ url_for('user_management') }}">
+                            <input type="hidden" name="pseudonyme" value="{{ pseudonyme }}">
+                            <select name="role">
+                                <option value='user' {% if user['role'] == 'user' %}selected{% endif %}>User</option>
+                                {% if session['role'] == 'super_admin' %}
+                                <option value='admin' {% if user['role'] == 'admin' %}selected{% endif %}>Admin</option>
+                                {% endif %}
+                            </select>
+                            <button type="submit">Mettre à jour</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </main>
+
+{% endblock %}

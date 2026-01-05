@@ -1,0 +1,32 @@
+<div class="menu_gauche">
+    <nav class="side-nav">
+        <a href="{{ url_for('acceuil') }}" class="nav-link">Accueil</a>
+        {% if session['role'] == 'admin' or session['role'] == 'super_admin' %}
+            <!-- Liens pour les administrateurs et super administrateurs -->
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="statistiquesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Statistiques
+                </a>
+                <div class="dropdown-menu" aria-labelledby="statistiquesDropdown">
+                    <a href="{{ url_for('statistiques') }}" class="dropdown-item">reconnaissance faciale</a>
+                    <a href="{{ url_for('statistiquesdetection') }}" class="dropdown-item">detection visage</a>
+                    <a href="{{ url_for('statistiquesemotion') }}" class="dropdown-item">reconnaissance emotion</a>
+                    <a href="{{ url_for('statistiquesagesexe') }}" class="dropdown-item">Âge et Sexe</a>
+                </div>
+            </div>
+            <a href="{{ url_for('user_management') }}" class="nav-link">Gestion des Utilisateurs</a>
+            <a href="{{ url_for('gestionphoto') }}" class="nav-link">Gestion des fichiers</a>
+        {% elif session['role'] == 'user' %}
+            <!-- Liens pour les utilisateurs -->
+            <a href="{{ url_for('ReconnaissanceImageMenu') }}" class="nav-link">Reconnaissance Faciale</a>
+            <a href="{{ url_for('DetectionVisageMenu') }}" class="nav-link">Détection de visage</a>
+            <a href="{{ url_for('menu_reconnaissance_emotion') }}" class="nav-link">Analyse d'émotion</a>
+            <a href="{{ url_for('menu_reconnaissance_agesexe') }}" class="nav-link">Identification de l'âge et du genre</a>
+            {% if abonnement_status == "Abonné" %}
+                <a href="{{ url_for('ReconnaissanceImageMenu') }}" class="nav-link">Reconnaissanceeee Faciale</a>
+            {% endif %}
+        {% endif %}
+
+    </nav>
+</div>
+

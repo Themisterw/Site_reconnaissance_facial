@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Résultat de Détection{% endblock %}
+
+{% block content %}
+<div class="form-container" style="margin: auto; width: 50%; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; background-color: #f8f9fa;">
+    <h1 style="text-align: center;">Ajoute une image pour une analyse d'émotion</h1>
+    <form action="/reconnaissanceemotion" method="post" enctype="multipart/form-data" >
+        <label for="imageInput">Télécharger une image :</label>
+        <input type="file" id="imageInput" name="image" accept="image/*" required style="margin-bottom: 20px;" onchange="afficherImage(event)">
+        <img id="imagePreview" style="max-width: 100%; display: none; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: center; width: 100%; gap: 10px;">
+            <button type="submit" class="btn btn-primary">Analyze</button>
+            <button type="button" onclick="supprimer()" class="btn btn-secondary">Supprimer l'aperçu</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    function afficherImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function() {
+            var imagePreview = document.getElementById('imagePreview');
+            imagePreview.src = reader.result;
+            imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    function supprimer() {
+        var input = document.getElementById('imageInput');
+        var imagePreview = document.getElementById('imagePreview');
+        input.value = '';  // Effacer l'entrée de fichier
+        imagePreview.style.display = 'none';  // Masquer l'aperçu de l'image
+    }
+</script>
+
+{% endblock %}

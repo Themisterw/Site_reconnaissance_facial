@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <h2>Connexion</h2>
+            <form method="post" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="pseudonyme">Pseudonyme:</label>
+                    <input type="text" id="pseudonyme" name="pseudonyme" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="mot_de_passe">Mot de passe:</label>
+                    <input type="password" id="mot_de_passe" name="mot_de_passe" required><br>
+                </div>
+                <div class="form-group button-group">
+                    <button type="submit">Connexion</button>
+                    <button type="button" onclick="window.location.href='{{ url_for('acceuil') }}'">Retour</button>
+                </div>
+                {% if erreur %}
+                    <p style="color: red;">{{ erreur }}</p>
+                {% endif %}
+            </form>
+        </div>
+    </main>
+
+{% endblock %}
+
+

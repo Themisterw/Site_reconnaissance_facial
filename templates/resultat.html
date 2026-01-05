@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Résultat de la Reconnaissance{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h2>Résultat de la Reconnaissance Faciale</h2>
+    {% if noms %}
+        <ul>
+            {% for nom in noms %}
+                <li>Personne détectée : {{ nom }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun visage détecté.</p>
+    {% endif %}
+    <div style="margin-top: 20px;">
+        <form action="/soumettre_avis" method="post">
+            <p>Votre avis sur ces résultats :</p>
+            <div>
+                <input type="radio" id="bon" name="feedback" value="bon" required>
+                <label for="bon">Bon</label>
+            </div>
+            <div>
+                <input type="radio" id="faux" name="feedback" value="faux">
+                <label for="faux">Faux</label>
+            </div>
+            <button type="submit" style="margin-top: 10px;">Soumettre Avis</button>
+            <button onclick="window.location.href='/ReconnaissanceImageMenu'" type="submit" style="margin-top: 10px;">Retour</button>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+

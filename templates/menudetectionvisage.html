@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Détection de Personne Spécifique{% endblock %}
+
+{% block content %}
+<div class="form-container" style="margin: auto; width: 50%; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; background-color: #f8f9fa;">
+    <h2>Détection de Personne Spécifique</h2>
+    <form id="detectForm" action="/detecter_personne" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="imageInput">Télécharger une image :</label>
+            <input type="file" name="image" id="imageInput" accept="image/*" required onchange="afficherImage(event)">
+        </div>
+        <div class="form-group">
+            <img id="imagePreview" src="#" alt="Aperçu de l'image" style="display: none; max-width: 100%; height: auto; margin-bottom: 20px;">
+        </div>
+        <div class="form-group">
+            <label for="nomInput">Nom de la personne :</label>
+            <input type="text" name="nom" id="nomInput" required>
+        </div>
+        <div class="form-group button-group">
+            <button type="submit" class="btn">Détecter</button>
+            <button type="button" class="btn delete" onclick="supprimer()">Supprimer</button>
+        </div>
+    </form>
+</div>
+<script>
+    function afficherImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function() {
+            var imagePreview = document.getElementById('imagePreview');
+            imagePreview.src = reader.result;
+            imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    function supprimer() {
+        var input = document.getElementById('imageInput');
+        var imagePreview = document.getElementById('imagePreview');
+        var nomInput = document.getElementById('nomInput');
+        input.value = '';  // Effacer l'entrée de fichier
+        imagePreview.style.display = 'none';  // Masquer l'aperçu de l'image
+        nomInput.value = '';  // Effacer l'entrée du nom
+    }
+</script>
+{% endblock %}

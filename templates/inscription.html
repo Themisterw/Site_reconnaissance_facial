@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Reconnaissance Faciale{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Créer un compte</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('inscription') }}" method="post">
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required>
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <label for="login">Nom d'utilisateur (Login):</label>
+        <input type="text" id="login" name="login" required>
+
+        <label for="email">Adresse e-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mot_de_passe">Mot de passe:</label>
+        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+
+        <label for="confirm_mot_de_passe">Confirmer le mot de passe:</label>
+        <input type="password" id="confirm_mot_de_passe" name="confirm_mot_de_passe" required>
+
+        <label for="date_naissance">Date de naissance:</label>
+        <input type="date" id="date_naissance" name="date_naissance" required>
+
+        <label for="adresse">Adresse:</label>
+        <input type="text" id="adresse" name="adresse" required>
+
+        <input type="submit" value="Créer un compte">
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            // Rediriger vers la page d'accueil après 2 secondes si le paramètre de succès est présent
+            setTimeout(function() {
+                window.location.href = "{{ url_for('login') }}";
+            }, 2000);
+        }
+    });
+</script>
+
+{% endblock %}
+
+

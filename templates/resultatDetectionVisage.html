@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Résultat de Détection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Résultat de Détection de Personne Spécifique</h2>
+    <p>Nom détecté : {{ nom }}</p>
+    {% if image_data %}
+        <img id="result-image" src="data:image/png;base64,{{ image_data }}" alt="Résultat de détection" style="max-width: 100%; height: auto;">
+        <button onclick="downloadImage()" class="btn">Télécharger Image</button>
+    {% else %}
+        <p>Aucun visage détecté.</p>
+    {% endif %}
+    <button onclick="window.location.href='/DetectionVisageMenu'" type="submit" style="margin-top: 10px;">Retour</button>
+</div>
+<div style="margin-top: 20px;">
+        <form action="/soumettre_avis_detection" method="post">
+            <p>Votre avis sur ces résultats :</p>
+            <div>
+                <input type="radio" id="bon" name="feedback" value="bon" required>
+                <label for="bon">Bon</label>
+            </div>
+            <div>
+                <input type="radio" id="faux" name="feedback" value="faux">
+                <label for="faux">Faux</label>
+            </div>
+            <button type="submit" style="margin-top: 10px;">Soumettre Avis</button>
+        </form>
+</div>
+
+<script>
+    function downloadImage() {
+        const image = document.getElementById('result-image');
+        const link = document.createElement('a');
+        link.href = image.src;
+        link.download = 'image_modifiee.jpg'; // Nom du fichier lors du téléchargement
+        link.click();
+    }
+</script>
+
+{% endblock %}
